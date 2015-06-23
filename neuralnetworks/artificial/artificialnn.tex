@@ -10,6 +10,10 @@ ANNs represent a type of computing based on the way that the brain performs comp
 
 The next sections try to explain how a biological neuron is model in order to build artificial neural networks capable of solving complex problems.
 
+
+
+
+
 \subsection{Neuron model}
 \label{subsec:neuronmodel}
 
@@ -26,7 +30,7 @@ In an artificial neuron, the \emph{inputs} $p_{k}, k=1,...,R$ are multiplied by 
 Thus, the \emph{output} of the neuron $i$ becomes \cite{Demuth:2014:NND:2721661}:
 
 \begin{equation}
-a_{i}=f_{i}(n_{i})=f_{i}(\sum_{k=1}^R w_{ki}p_{k}+b_{i})
+a_{i}=f_{i}(n_{i})=f_{i}(\sum_{k=1}^R w_{ik}p_{k}+b_{i})
 \label{eq:expandedgeneralneuroneq}
 \end{equation}
 
@@ -86,7 +90,7 @@ A particular function is chosen to satisfy some specification of the problem tha
 	\label{eq:logsig}
 	\end{equation}
 
-	The log-sigmoid function is commonly used in multilayer networks that are trained using the backpropagation learning rule (see \secref{learningrules}), in part because this function is differentiable.
+	The log-sigmoid function is commonly used in multilayer networks that are trained using the backpropagation learning rule (see \secref{generalbackprop}), in part because this function is differentiable.
 	}
 	\item{\textbf{\emph{Hyperbolic Tangent Sigmoid} function}\hfill \\
 	The hyperbolic tangent function produces positive numbers between -1 and 1 according to:
@@ -98,6 +102,9 @@ A particular function is chosen to satisfy some specification of the problem tha
 	}
 
 \end{description}
+
+
+
 
 \subsection{Neural network model}
 \label{subsec:neuralnetworkmodel}
@@ -147,31 +154,59 @@ $\mathbf{a}^3$ can be written as:
 
 It is important to highlight that, when implementing ANNs, the first layer is called \emph{input layer}, the last one \emph{output layer} and all the intermediate ones are known as \emph{hidden layers}. When there is no hidden layers, it is said that the net is a one-layer network. This way, two-layers networks will denote a net with a unique hidden layer. The reason of this is that the weigths of the input layer are usually fixed to $w=1$.
 
+
+
+
+\subsection{Learning rules}
+\label{subsec:learningrules}
+
+As we indicated in \subsecref{neuronmodel}, the weights and the biases parameters of each neuron can be adjusted so that the network input/output relationship meets some specific goal.The procedure for modifying these terms is known as \emph{learning} or \emph{training algorithm}. 
+
+In general, training rules can be divided into two broad categories \cite{demuth2008neural}:
+\begin{itemize}
+\item \emph{Supervised} or \emph{Associative learning}
+, in which the network is trained by providing it with input and target output patterns known as ``the training set''. Thus, a training set of $Q$ patterns can be expressed as
+\begin{equation}
+\{\mathbf{p}_1,\mathbf{t}_1\},\{\mathbf{p}_2,\mathbf{t}_2\}, ... , \{\mathbf{p}_Q,\mathbf{t}_Q\}
+\end{equation}
+where $\mathbf{p}_q$ is an input vector of the network and $\mathbf{t}_q$ is the corresponding target output vector.
+The learning rule is then used to adjust the weights and biases of the network by comparing the network outputs and the targets when the corresponding set of inputs are applied to the network.
+\item \emph{Unsupervised} learning or \emph{Self-organisation}, in which there are no target outputs available, so the weights and biases are modified in response to network inputs only. 
+Unlike the supervised learning, there is no a priori set of patterns to be learn;
+rather the system must develop its own representation of the input stimuli.
+\end{itemize}
+
+It is paramount to emphasize that, whichever is the learning rule chosen for 
+a particular ANN, the training begins by assigning some initial values for the network parameters. Then, the corresponding algorithm will be in charge of adjusting them to perform the desired task.
+
+Since our experimental scenario considers a target output (the pain curve described in \secref{paincurve}), we have focused in the subset of supervised training algorithms. 
+Among the available learning rules of this type, the \emph{backpropagation} algorithm, which is explained in \secref{generalbackprop}, has been the centre of our attention. 
+
 \subsection{Advantages and disadvantages}
 
-\textsc{COPY-PASTE!!!!!!!!!!!!!!!!!!!!!!!!!!!! - ESCRIBIR}\\
-Due to the admissible predictive performance of NN, it is presently the
-most popular data modeling method used in the medical domain [37]. The ability of the NN is to model
-highly nonlinear systems such as physiological records where the correlation of the input parameters is
-not easily detectable [71].
+% \textsc{COPY-PASTE!!!!!!!!!!!!!!!!!!!!!!!!!!!! - ESCRIBIR}\\
+% Due to the admissible predictive performance of NN, it is presently the
+% most popular data modeling method used in the medical domain [37]. The ability of the NN is to model
+% highly nonlinear systems such as physiological records where the correlation of the input parameters is
+% not easily detectable [71].
 
-In sum, since the progress of learning in NN would be complex, the method is commonly used for
-decision making in clinical conditions with large and complicated data sets. But same as SVM it could
-not handle domain knowledge to enrich the results. Additionally, as the modeling process in NN is a
-black box progress, NN method needs to justify for each input data. So, NN is not counted as a portable
-technique to easily apply for diverse data sets.
+% In sum, since the progress of learning in NN would be complex, the method is commonly used for
+% decision making in clinical conditions with large and complicated data sets. But same as SVM it could
+% not handle domain knowledge to enrich the results. Additionally, as the modeling process in NN is a
+% black box progress, NN method needs to justify for each input data. So, NN is not counted as a portable
+% technique to easily apply for diverse data sets.
 
-Artificial neural networks were up until recently the
-most popular artificial intelligence-based data modeling
-algorithm used in clinical medicine. This is probably due to
-their good predictive performance, albeit they may have a
-number of deficiencies [18] that include high sensitivity to the
-parameters of the method—including those that determine
-the architecture of the network, high computational cost in
-training, and induction of the model that may – at best – be
-hard to interpret by domain experts. Neural networks may be
-able to model complex non-linear relationships, comprising
-an advantage over simpler modeling methods like the na ̈ve
-ı
-Bayesian classifier or logistic regression.
+% Artificial neural networks were up until recently the
+% most popular artificial intelligence-based data modeling
+% algorithm used in clinical medicine. This is probably due to
+% their good predictive performance, albeit they may have a
+% number of deficiencies [18] that include high sensitivity to the
+% parameters of the method—including those that determine
+% the architecture of the network, high computational cost in
+% training, and induction of the model that may – at best – be
+% hard to interpret by domain experts. Neural networks may be
+% able to model complex non-linear relationships, comprising
+% an advantage over simpler modeling methods like the na ̈ve
+% ı
+% Bayesian classifier or logistic regression.
 
