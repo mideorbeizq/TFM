@@ -1,2 +1,188 @@
 
 %% main file
+
+
+\documentclass[a4paper,11pt,english]{report} %book, report, article
+\usepackage[english]{babel} %%%para separar correctamente las palabras de multitud de idiomas%%%
+\usepackage[utf8]{inputenc} %%%Este paquete permite poner acentos directamente%%%
+
+\usepackage{indentfirst} %%%Indentado de primera línea de cada párrafo%%%
+\usepackage{parskip} %%% add some vspace between paragraphs
+\setlength{\parindent}{15pt}
+
+\usepackage[gen]{eurosym} %soporte para el comando \euro
+\usepackage{mathtools}
+\usepackage{graphicx} % Required for including pictures
+%\usepackage{epstopdf} %para poder usar imagenes eps%
+%\DeclareGraphicsExtensions{.pdf,.jpeg,.jpg,.png,.eps}
+\usepackage{float} % Allows putting an [H] in \begin{figure} to specify the exact location of the figure
+
+\usepackage[bindingoffset=0.5cm]{geometry}
+%\usepackage[Sonny]{fncychap}
+\usepackage[Lenny]{fncychap}
+\usepackage[T1]{fontenc}
+\usepackage{palatino}
+\usepackage{tabularx}
+\usepackage{multirow}
+
+\usepackage[colorlinks=true, linkcolor=blue, filecolor=black, citecolor=black, urlcolor=blue]{hyperref}
+
+\usepackage{changepage} % For the adjustwidth environment in 2ndpage
+\usepackage{listings}
+\usepackage{color}
+\usepackage{gensymb}
+
+\usepackage{fancyhdr}
+
+%% Shortcut command for referencing floats
+\newcommand{\figref}[1]{Figure~\ref{fig:#1}}
+\newcommand{\figsref}[2]{Figures~\ref{fig:#1}~and~\ref{fig:#2}}
+\newcommand{\figtoref}[2]{Figures~\ref{fig:#1}~through~\ref{fig:#2}}
+
+\newcommand{\tblref}[1]{Table~\ref{tbl:#1}}
+\newcommand{\eref}[1]{Equation~\ref{eq:#1}}
+\newcommand{\esref}[2]{Equations~\ref{eq:#1}~and~\ref{eq:#2}}
+\newcommand{\etoref}[2]{Equations~\ref{eq:#1}~through~\ref{eqn:#2}}
+
+\newcommand{\secref}[1]{Section~\ref{sec:#1}}
+\newcommand{\subsec}[1]{Section~\ref{subsec:#1}}
+\newcommand{\subsubsec}[1]{Section~\ref{subsubsec:#1}}
+\newcommand{\charef}[1]{Chapter~\ref{chapter:#1}}
+\newcommand{\aref}[1]{Appendix~\ref{apndx:#1}}
+
+\newcommand{\etal}{\mbox{\emph{et al. }}}
+\newcommand{\etals}{\mbox{\emph{et al.}'s }}
+\newcommand{\ie}{\mbox{\emph{i.e.\\}}}
+\newcommand{\eg}{\mbox{\emph{e.g.\\}}}
+\newcommand{\ignore}[1]{}
+
+
+\hyphenation{exam-ple}          %And not exa-mple
+\hyphenation{WBSNs}
+\hyphenation{des-cribed}
+\hyphenation{know-ledge}
+
+%% INICIO DOCUMENTO
+\begin{document}
+
+\pagestyle{empty}
+
+\input{1stpage}
+\cleardoublepage
+\input{2ndpage}
+\cleardoublepage
+\input{3rdpage}
+\cleardoublepage
+
+
+\chapter*{}
+\thispagestyle{empty}
+
+\begingroup
+\begin{flushleft}
+\itshape
+agradecimientos\\
+bla\\
+bla...
+\end{flushleft}
+\endgroup
+
+\cleardoublepage
+
+%% ESTRUCTURA DEL DOCUMENTO
+\chapter*{}
+\subsection*{Summary}
+\input{summary}
+\subsection*{Resumen}
+\input{resumen}
+
+\pagestyle{plain}
+\pagenumbering{roman}
+
+\tableofcontents
+\listoffigures
+\listoftables
+% This line needed to avoid \listoftables starting with page 1 (roman!)
+\cleardoublepage
+
+\pagestyle{empty}
+\chapter*{Glossary}
+\input{glossary}
+\cleardoublepage
+
+\pagenumbering{arabic}
+\pagestyle{headings}
+
+%The first page of every chapter gets the plain page style internally; you can change this behaviour by redefining the plain style:
+\fancypagestyle{plain}{%
+	\fancyhf{} % clear all header and footer fields
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}
+	}
+
+
+\chapter{Introduction}
+\input{introduction}
+\chapter{Objectives}
+\input{objectives}
+\chapter{Methodology}
+\input{methodology}
+\chapter{State of the art}
+\input{stateoftheart}
+
+% TEORIA
+\chapter{Neural Networks}
+\input{neuralnetworks/intro}
+\section{Biological Neural Networks}
+\input{neuralnetworks/biologicalnn}
+\section{Artificial Neural Networks}
+\input{neuralnetworks/artificial/artificialnn}
+\section{Topologies of Artificial Neural Networks}
+	\subsection{Perceptron}
+	\input{neuralnetworks/artificial/perceptron}
+	\subsection{Time Delay Neural Networks}
+	\input{neuralnetworks/artificial/tdnn}
+	\subsection{Non-Linear Autorregresive with Exogenus Input}
+	\input{neuralnetworks/artificial/narx}
+	\subsection{Spiking Neural Networks}
+	\input{neuralnetworks/artificial/snn}
+\section{Learning rules in Artificial Neural Networks}
+\input{neuralnetworks/artificial/learningrules}
+
+% ADQUISICION SEÑALES
+\chapter{Data acquisition}
+\input{setup/intro}
+\section{Physiological signals}
+\input{setup/physiosignals}
+\section{The experiment}
+\input{setup/experiment}
+\section{The symptomatic pain curve}
+\input{setup/paincurve}
+
+% APLICACION DE ALGORITMOS
+\chapter{Application of Artificial Neural Networks}
+\input{nnapplication/intro}
+\section{Perceptron}
+\input{nnapplication/perceptron}
+\section{Time Delay Neural Networks}
+\input{nnapplication/tdnn}
+\section{Non-Linear Autorregresive model with Exogenus Input}
+\input{nnapplication/narx}
+\section{Spiking Neural Networks}
+\input{nnapplication/snn}
+
+\chapter{Conclusions and future work}
+\input{conclusionsandfuturework}
+\chapter*{Annexes}
+\input{annexes}
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{bib/bibtfm}
+
+\cleardoublepage
+
+
+
+\end{document}
+
