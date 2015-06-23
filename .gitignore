@@ -1,0 +1,20 @@
+### Vim
+*~
+*.swp
+*.swo
+
+### Emacs
+*#
+.#*
+
+### Compiled papers stuff
+*.bbl
+*.bbl.log
+*.blg
+*.log
+*.aux
+*.aux.log
+*.pdf.log
+*.spl
+*.out
+*.zip
