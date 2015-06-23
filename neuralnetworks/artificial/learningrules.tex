@@ -1,0 +1,19 @@
+
+\label{sec:learningrules}
+
+As we indicated in \subsecref{neuronmodel}, the weights and the biases parameters can be adjusted so that the neuron input/output relationship meets some specific goal.The procedure for modifying theses terms of a network is known as \emph{learning rule} or \emph{training algorithm}. 
+
+In general, training rules can be divided into two broad categories \cite{demuth2008neural}:
+\begin{itemize}
+\item \emph{Supervised} or \emph{Associative learning}
+, in which the network is trained by providing it with input and matching output patterns known as ``the training set''. 
+The learning rule is then used to adjust the weights and biases of the network by comparing the network outputs and the targets when the corresponding set of inputs are applied to the network.
+\item \emph{Unsupervised} learning or \emph{Self-organisation}, in which there are no target outputs available, so the weights and biases are modified in response to network inputs only. 
+Unlike the supervised learning, there is no a priori set of patterns to be learn;
+rather the system must develop its own representation of the input stimuli.
+\end{itemize}
+
+Since our experimental scenario considers a target output (the pain curve described in \secref{paincurve}), we have focused in the subset of supervised training algorithms. 
+Among the available learning rules of this type, the \emph{backpropagation} algorithms has been the centre of our attention. 
+
+\subsection{Backpropagation}
