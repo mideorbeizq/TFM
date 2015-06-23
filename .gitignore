@@ -12,8 +12,12 @@
 *.bbl.log
 *.blg
 *.log
+*.lof
+*.lot
+*.toc
 *.aux
 *.aux.log
+*.pdf
 *.pdf.log
 *.spl
 *.out

@@ -13,13 +13,13 @@ The next sections try to explain how a biological neuron is model in order to bu
 \subsection{Neuron model}
 \label{subsec:neuronmodel}
 
-As described in \secref{BNN}, a typical biological neuron has four main regions: the soma, the axon, the dendrites and the synapses. These parts are also be differentiated in an artificial neuron. \figref{neuronmodel} shows how a biological neuron is model for ANNs.
+As described in \secref{BNN}, a typical biological neuron has four main regions: the soma, the axon, the dendrites and the synapses. These parts are also be differentiated in an artificial neuron. \figref{aneuronmodel} shows how a biological neuron is model for ANNs.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.5\textwidth]{images/neuronmodel.png}
 \caption{Model of an artificial neuron inspired in a biological one}
-\label{fig:neuronmodel}
+\label{fig:aneuronmodel}
 \end{figure}
 
 In an artificial neuron, the \emph{inputs} $p_{k}, k=1,...,R$ are multiplied by \emph{weights} $w_{k}$ and summed up together with the optional constant \emph{bias} or \emph{offset} term $b$. The resulting scalar $n$, often referred to as the \emph{net input}, goes into the \emph{activation function} -also called \emph{transfer function}- $f$, which produces the scalar neuron \emph{output} $a$.
@@ -109,8 +109,7 @@ The number of neurons in the last layer determines the number of outputs $S$ of 
 
 In addition to the activation function $f$, the number of inputs $R$ of each neuron can be configured, resulting in almost an infinite source of possible combinations with which try to solve any kind of scenario.
 It must be noted that the activation functions are usually assumed to be the same in each layer of neurons. 
-Normally a hyberbolic tangent or the sigmoid function is used, leading the ANN to a nonlinear parameterized map from input space $p\in\mathbb{R}^S$ to output space 
-$a\in\mathbb{R}^R$.
+Normally a hyberbolic tangent or the sigmoid function is used, leading the ANN to a nonlinear parameterized map from input space $p\in\mathbb{R}^S$ to output space $a\in\mathbb{R}^R$.
 
 \figref{neuralnetworkmodel} shows an example of an artificial neural network topology with three layers and the same number of neurons in each layer. 
 
@@ -175,4 +174,4 @@ able to model complex non-linear relationships, comprising
 an advantage over simpler modeling methods like the na ̈ve
 ı
 Bayesian classifier or logistic regression.
-}
+
