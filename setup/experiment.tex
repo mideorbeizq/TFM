@@ -1,0 +1,54 @@
+%\chapter{Experimental setup}
+\label{sec:experiment}
+
+This section summarises the relevant details of the clinical study, as well as the main characteristics of the system used for the acquisition of the input signals of the implemented algorithms. It must be highlighted that the aforesaid system was not developed during this project, but as part of the Final Degree Project of the author \cite{Irene:PFC:2014}.
+
+
+\subsection{The patients}
+\label{subsec:thepatients}
+
+Clinically, the experiment was accomplished with patients diagnosed with migraine according to diagnostic criteria of the International Headache Society (IHS). During the study, they took a portable monitoring non-invasive smart system along, for a maximum of two weeks, 24 hours a day. 
+
+Among the criteria to choose the patients, the following ones describe the ideal profile of the volunteer:
+\begin{itemize}
+	\item Migraineurs aged 15 to 69 years.
+	\item Migraineurs diagnosed with migraine by a headache specialist using ICHD-3 criteria \cite{pmid23771276}
+	\item Migraineurs who have had, at least, 1 crisis per week during last three months.
+	\item Migraineurs that do not take drugs which can alter the variables we monitor
+	\item Migraineurs with normal neurological exam
+	\item Migraineurs who have signed an informed consent
+	\item Migraineurs that have a minimum knowledge about using smartphones
+\end{itemize}
+
+Once a patient was accepted, the volunteer was asked for the corresponding informed consent. We made an appointment with him and the doctor in which we explained in detail the operation of the system. Additionally, we provided the patient with a user manual of the system in which our contacts could be found for consulting any doubt.
+
+
+\subsection{The system}
+\label{subsec:thesystem}
+
+The data acquisition was carried out with a WBSN integrated into a
+broader multitier telemedicine system. The architecture implemented
+involves two different sensing motes which communicate with an Android
+platform via Bluetooth. The data are stored and transmitted through the
+Internet to a \emph{Cloud} storage system where follow-up and processing tasks are
+done.
+
+The two used sensing motes were \emph{PLUX-Wireless Biosignals}
+\cite{BIOPLUXws} and \emph{Nonin Onyx II} \cite{NONINws}. EDA, skin
+temperature, ECG and EEG signals were acquired with the former and PPG and SpO2 values were registered with the latter. The HR signal was then calculated offline from the
+ECG signal by our peak-detection algorithm. We highlight that the developed algorithms for
+migraine prediction take as input a subset of four of these hemodynamic signals: HR, EDA, skin temperature and SpO2.
+
+The Bluetooth-enabled Android device receives the data wirelessly as
+soon as each sensing mote takes a sample. 
+The sampling frequency for the ECG and EEG sensors was 250 Hz,
+1 Hz for the skin temperature and EDA variables,
+3 Hz for the SpO2 signal and 75 Hz for PPG. 
+This introduced some synchronization issues to deal with.
+
+The Android smartphone does not only receive and store the gathered
+data, but also includes a form with questions related to every
+headache. These questions include the time when the migraine phase
+begins and ends, suffered symptoms and possible triggers of the
+attack. The patients were asked to fill up the form as soon as a
+headache has finished. Additionally, they were inquired about the evolution of their pain intensity during the migraine crisis in order to define a pain curve that constitutes the target signal of our algorithms.
