@@ -1,16 +1,11 @@
 
 \label{subsec:ANN:TDNN}
 
-Prediction requires the use of dynamic neural networks, as discussed in
-Chapter 14. The specific form of the network will depend on the particular
-application. The simplest network for nonlinear prediction is the focused
-time-delay neural network, which is shown in Figure 22.3. This is part of a
-general class of dynamic networks, called focused networks, in which the
-dynamics appear only at the input layer of a static multilayer feedforward
-network. This network has the advantage that it can be trained using static
-backpropagation algorithms, since the tapped-delay-line at the input of the
-network can be replaced with an extended vector of delayed values of the
-input.
+As we indicated in \subsecref{neuralnetworkmodel}, prediction tasks requires the use of a dynamic neural network because of its memory capacity. The simplest network for nonlinear prediction is the time-delay neural network (TDNN).
+
+TDNN are similar to feedforward networks (see \figref{neuralnetworkmodelVectorial}), except that the input weight has a tap delay line (TDL) associated with it \cite{dimith3neural}. This allows the network to have a finite dynamic response to time series input data. 
+
+\figref{tdnn} shows an example of a TDNN, in which the dynamics appear only at the input layer of a static multilayer feedforward network. Notice that, in dynamic networks, the inputs and outputs of each functional block are time dependent ($\mathbf{p}(t)$,$\mathbf{n}(t)$, $\mathbf{a}(t)$).
 
 \begin{figure}[!ht]
 \centering
@@ -18,3 +13,9 @@ input.
 \caption{Time Delay network}
 \label{fig:tdnn}
 \end{figure}
+
+This network has the advantage that it can be trained using exactly the same static backpropagation algorithms (read \secref{generalbackprop}),
+since the tapped-delay-line at the input of the network can be replaced with an extended vector of delayed values of the
+input.
+
+A variant of TDNN are the distributed delay neural network, which has delays on the layer weights in addition to the input weights.

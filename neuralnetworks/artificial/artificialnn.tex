@@ -106,6 +106,8 @@ A particular function is chosen to satisfy some specification of the problem tha
 
 
 
+
+
 \subsection{Neural network model}
 \label{subsec:neuralnetworkmodel}
 
@@ -152,7 +154,17 @@ $\mathbf{a}^3$ can be written as:
 \label{fig:neuralnetworkmodelVectorial}
 \end{figure}
 
-It is important to highlight that, when implementing ANNs, the first layer is called \emph{input layer}, the last one \emph{output layer} and all the intermediate ones are known as \emph{hidden layers}. When there is no hidden layers, it is said that the net is a one-layer network. This way, two-layers networks will denote a net with a unique hidden layer. The reason of this is that the weigths of the input layer are usually fixed to $w=1$.
+It is important to highlight that, when implementing ANNs, the first layer is called \emph{input layer}, the last one \emph{output layer} and all the intermediate ones are known as \emph{hidden layers}. 
+%When there is no hidden layers, it is said that the net is a one-layer network. This way, two-layers networks will denote a net with a unique hidden layer. The reason of this is that the weigths of the input layer are usually fixed to $w=1$.
+
+Now, if one looks at \figref{neuralnetworkmodel}, it is noticed that the network drawn has no feedback elements and contains no delays in the input layer. This kind of networks are known as \emph{static feedforward} nets, in which the output is calculated
+directly from the input through feedforward connections. 
+In the others, classified as \emph{dynamic} nets,
+the output depends not only on the current input to the network, but also on the previous inputs (\emph{feedforward-dynamic}) and  outputs (\emph{recurrent-dynamic}) \cite{dimith3neural}.
+Because dynamic networks have memory, they can be trained to learn sequential or time-varying patterns, which is exactly what our project needs to predict a migraine. 
+
+
+
 
 
 
@@ -180,7 +192,8 @@ It is paramount to emphasize that, whichever is the learning rule chosen for
 a particular ANN, the training begins by assigning some initial values for the network parameters. Then, the corresponding algorithm will be in charge of adjusting them to perform the desired task.
 
 Since our experimental scenario considers a target output (the pain curve described in \secref{paincurve}), we have focused in the subset of supervised training algorithms. 
-Among the available learning rules of this type, the \emph{backpropagation} algorithm, which is explained in \secref{generalbackprop}, has been the centre of our attention. 
+Among the available learning rules of this type, the \emph{backpropagation} algorithm has been the centre of our attention. It is a gradient-based learning rule that both static an dynamic networks can use with minor changes. A complete explanation of the backpropagation algorithm can be read in \secref{generalbackprop}.
+
 
 \subsection{Advantages and disadvantages}
 
