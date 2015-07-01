@@ -7,7 +7,16 @@ In general, training rules can be divided into two broad categories \cite{demuth
 \begin{itemize}
 \item \emph{Supervised} or \emph{Associative learning}
 , in which the network is trained by providing it with input and matching output patterns known as ``the training set''. 
-The learning rule is then used to adjust the weights and biases of the network by comparing the network outputs and the targets when the corresponding set of inputs are applied to the network.
+Thus, a training set of $Q$ patterns can be expressed as
+\begin{equation}
+\{\mathbf{p_{1}} , \mathbf{t_{1}} \}, \{\mathbf{p_{2}} , \mathbf{t_{2}}\}, ...,
+ \{\mathbf{p_{Q}} , \mathbf{t_{Q}} \}
+\label{eq:trainingset}
+\end{equation}
+
+where $\mathbf{p_{q}}$ is an input vector of the network and tq is the corresponding target
+output vector. The learning rule is then used to adjust the weights and biases of the network by comparing the network outputs and the targets when the corresponding set of inputs are applied to the network.
+
 \item \emph{Unsupervised} learning or \emph{Self-organisation}, in which there are no target outputs available, so the weights and biases are modified in response to network inputs only. 
 Unlike the supervised learning, there is no a priori set of patterns to be learn;
 rather the system must develop its own representation of the input stimuli.

@@ -16,7 +16,6 @@ so we can forget temporally about form and characterise them by their firing tim
 \mathcal{F}_{j}=\{t^{(1)},t^{(2)}...,t^{(n)}\}
 \label{eq:spiketrain}
 \end{equation}
-
 where $\mathcal{F}_{j}$ is chronologically ordered; \ie,
 if $1\leq f<g \leq n$, then $t_{j}^{(f)} < t_{j}^{(g)}$.
 
@@ -104,7 +103,6 @@ u_{j}(t)=\sum_{f\in \mathcal{F}_{j}}\eta(t-t_{j}^{(f)})+
 \label{eq:srmuniqueconnection}
 \end{equation}
 
-
 As it occurs with the other ANNs topologies described in this chapter,
 the strength of the synapse involving the presynaptic neuron $i$ and the postsynaptic neuron $j$ is modeled with a weight term $w_{ji}$.
 Furthermore, in order to incorporate spatial-temporal information in the communication, SNNs include the axonal delay $d_{ji}$ caused by the signal transmission from the soma of neuron $i$ to the dendrites of neuron $j$.
@@ -112,7 +110,6 @@ Furthermore, in order to incorporate spatial-temporal information in the communi
 Now, if we imagine a neural network like the one shown in \figref{snn}, 
 where every connection consists of $1 \leq k \leq m$ synapses with different weights and delays, 
 the resultant SRM of the spiking neuron $j$ can be expressed as
-
 \begin{equation}
 u_{j}(t)=
 \sum_{f\in \mathcal{F}_{j}}\eta(t-t_{j}^{(f)})+
@@ -122,7 +119,6 @@ u_{j}(t)=
 	w_{ji}^{k}\varepsilon(t-t_{i}^{(f)}-d_{ji}^k)+u_{\text{rest}}
 \label{eq:srmmultipleconnections}
 \end{equation}
-
 where $w_{ji}^k$ and $d_{ji}^k$ refer the weight and delay of the connection $k$ from the presynaptic neuron $i$ to the postsynaptic one $j$ respectively.
 
 \begin{figure}[!ht]
