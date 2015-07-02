@@ -1,0 +1,103 @@
+
+\label{subsec:snnbackprop}
+As we described in \subsecref{ANN:SNN}, SNN incorporate spatial-temporal information. Therefore, the new backpropagation algorithm must do the same. The following lines try to describe how the already-known learning rules are adapted to a SNN where each neuron is not limited to spike only once.
+More details of the process can be found in \cite{booij2005gradient}.
+
+Firstly, taking into account that the inputs and outputs of a SNN are firing times, the error function for each pattern described in \eref{patternerrorfunction} is adapted as follows:
+\begin{equation}
+E=\frac{1}{2}\sum_{j=1}^{S} (t_{j}^{d}-t_{j}^{a})^2
+\label{eq:patternerrorfunctionSNN}
+\end{equation}
+where $j$ denotes each neuron of the $S$-dimensional output-layer, and $\{t_{j}^{d}\}=\mathcal{F}_{j}^{d}$ and $\{t_{j}^{a}\}=\mathcal{F}_{j}^{a}$ represent the set of desired spike times and actual firing times respectively.
+
+For error-backpropagation, we treat each one of the $1 \leq k \leq m$ synaptic terminals as a separate connection. Hence, for the 
+updating rule in \eref{updatingrule} using the gradient descent method, we need to calculate:
+\begin{equation}
+\Delta w_{ji}^{k}= -\mu\frac{\partial E}{\partial w_{ji}^{k}}
+\label{eq:updatingruleSNN}
+\end{equation}
+where $\mu$ is the learning rate and $w_{ji}^{k}$ denotes the weight of the $k$-th connection between the presynaptic neuron $i$ and the postsynaptic neuron $j$. 
+Other parameters in SNN like the axonal delays $d_{ji}^{k}$ have also be tuned to reduce the error function \cite{schrauwen2004extending}.
+
+
+As it is expressed in \eref{thresspikecondition},
+the time when a spiking neuron $j$ fires is function of the membrane potential $u_{j}(t)$, which depends in turn on the weights $w_{ji}^{k}$ as formulated in \eref{srmmultipleconnections}. Besides, because neurons can fire multiple times, the above equation must be expanded to
+\begin{equation}
+\Delta w_{ji}^{k}= -\mu
+\sum_{f\in \mathcal{F}_{j}}
+\frac{\partial E}{\partial t_{j}^{(f)}}
+\frac{\partial t_{j}^{(f)}}{\partial w_{ji}^{k}}
+\label{eq:updatingruleSNNmultiplespikes}
+\end{equation}
+where $\mathcal{F}_{j}$ denotes the spike train of each neuron $j$. This way, the updated weight is assigned to the subsequent spike at the time of its arrival at the synapse.
+
+The derivative of the firing time with respect to the weight can be computed starting out with the thresholding condition of $u_{j}(t)$, in which $u_{j}(t_{j})=\vartheta$. The resultant expression is (see \cite{bohte2002error} and \cite{booij2004temporal} for a complete derivation)
+\begin{equation}
+\frac{\partial t_{j}^{(f)}}{\partial w_{ji}^{k}}
+=
+\frac{\partial u_{j}(t_{j}^{(f)})}{\partial w_{ji}^{k}}
+\frac{-1}{\frac{\partial u_{j}(t_{j}^{(f)})}{\partial t_{j}^{(f)}}}
+\label{eq:dtdw}
+\end{equation}
+
+We can derive the partial derivative of the potential during a spike $t_{j}^{(f)}$ with respect to the weight from \eref{srmmultipleconnections}.
+We must keep in mind that earlier spikes $t_{j}^{(e)}<t_{j}^{f}$ also depend on the same weight and influence the potential, so the function becomes recursive
+\begin{equation}
+\frac{\partial u_{j}(t_{j}^{(f)})}{\partial w_{ji}^{k}}
+=
+-\sum_{e\in \mathcal{F}_{j}}\eta'(t_{j}^{(f)}-t_{j}^{(e)})
+\frac{\partial t_{j}^{(e)}}{\partial w_{ji}^{k}}
++
+\sum_{l\in \mathcal{F}_{i}}\varepsilon(t_{j}^{(f)}-t_{i}^{(l)}-d_{ji}^k)
+\label{eq:dudw}
+\end{equation}
+
+It is worth highlighting that it is not explicitly required that $t_{j}^{(e)}<t_{j}^{(f)}$ beacuse this condition is already met due to the fact that $\eta(t)=\varepsilon(t)=0~\text{for}~t\leq 0$.
+
+The denominator of the second factor of \eref{dtdw} can be calculated as
+\begin{equation}
+\frac{\partial u_{j}(t_{j}^{(f)})}{\partial t_{j}^{(f)}}
+=
+\sum_{e\in \mathcal{F}_{j}}\eta'(t_{j}^{(f)}-t_{j}^{(e)})
++
+\sum_{i\in \Gamma_{j}}
+\sum_{l\in \mathcal{F}_{i}}
+\sum_{k=1}^{m}
+	w_{ji}^{k}\varepsilon'(t_{j}^{(f)}-t_{i}^{(l)}-d_{ji}^k)
+\label{eq:dudt}
+\end{equation}
+
+Once we can compute the entire expression of \eref{dtdw}, we calculate the first derivative factor of \eref{updatingruleSNNmultiplespikes}. 
+Its expression is derived for every spike of non-output neuron, 
+which depends on all spikes produced by all its postsynaptic neurons $h$:
+\begin{equation}
+\frac{\partial E}{\partial t_{j}^{(f)}}
+=
+\sum_{h\in \Gamma{j}}
+\sum_{g\in \mathcal{F}_{h}}
+\frac{\partial E}{\partial t_{h}^{(g)}}
+\frac{\partial t_{h}^{(g)}}{\partial t_{j}^{(f)}}
+\end{equation}
+where the derivative of a postsynaptic spike $t_{h}^{(g)}$ with respect to a presynaptic $t_{j}^{(f)}$ spike can be further expanded as in equation \eref{dtdw}:
+\begin{equation}
+\frac{\partial t_{h}^{(g)}}{\partial t_{j}^{(g)}}
+=
+\frac{\partial u_{h}(t_{h}^{(g)})}{\partial t_{j}^{(f)}}
+\frac{-1}{\frac{
+\partial u_{h}(t_{h}^{(g)})}{\partial t_{h}^{(g)}}}
+\end{equation}
+
+The second factor is calculated with \eref{dudt}; the derivative of the potential during a postsynaptic spike with respect to a presynaptic spike, can again be derived from \eref{srmmultipleconnections} as follows
+\begin{equation}
+\frac{\partial u_{h}(t_{h}^{(g)})}{\partial t_{j}^{(f)}}
+=
+-\sum_{n\in \mathcal{F}_{j}}\eta'(t_{h}^{(g)}-t_{h}^{(n)})
+\frac{\partial t_{h}^{(n)}}{\partial t_{j}^{(f)}}
+-
+\sum_{k=1}{m}w_{hj}^{k}\varepsilon'(t_{h}^{(g)}-t_{j}^{(f)}-d_{hj}^k)
+\end{equation}
+
+Notice that all are recursive functions, 
+which is the temporal equivalent of the conventional backpropagation technique,
+where the error was back-propagated spatially through the network. The order in which the calculations are done is therefore paramount.
+

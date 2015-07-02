@@ -61,7 +61,7 @@ u_{j}(t-t_{i}^{(f)})-u_{\text{rest}}=\varepsilon(t-t_{i}^{(f)})
 \end{equation}
 where $\varepsilon$, called \emph{spike response function}
 or \emph{postsynaptic potential} (PSP), 
-emulates the contribution of one synaptic terminal on the potential of the postsynaptic neuron caused by a presynaptic spike.
+emulates the contribution of one synaptic terminal on the potential of the postsynaptic neuron caused by a presynaptic spike. The $\varepsilon$ function allows multiple implementations; the only requirement it must accomplished is that $\varepsilon(t)=0~\text{for}~t\leq 0$.
 }
 
 \item {\textbf{\figref{srmdynamic} B}\hfill \\
@@ -75,22 +75,25 @@ where $\Gamma_{j}$ referres to the set of presynaptics neurons $i$ of the postsy
 }
 
 \item {\textbf{\figref{srmdynamic} C}\hfill \\
-The aforesaid linearity breaks down if the amount of spikes arrived during a short interval makes the membrane potential $u_{j}$ reach the critical value $\vartheta$. In that situation, \eref{thresspikecondition} is accomplished and an action potential is triggered. The membrane potential sufferes then a peak of pulse (out of bounds in \figref{srmdynamic}C) and then returns to the resting potential after passing through a phase of hyperpolarization below the resting value. This 
+The aforesaid linearity breaks down if the amount of spikes arrived during a short interval makes the membrane potential $u_{j}$ reach the critical value $\vartheta$. In that situation, \eref{thresspikecondition} is accomplished and an action potential is triggered. The membrane potential sufferes then a peak of pulse (out of bounds in \figref{srmdynamic} C) and then returns to the resting potential after passing through a phase of hyperpolarization below the resting value. This 
 %negative overshoot 
-process is modeled with a certain standard time course denoted by $\eta(t-t_{j}^{(f)})$, where $t_{j}^{(f)}$ referres the firing time, which is defined by the moment of threshold $\vartheta$ crossing. Consequently, as far as the membrane potential is concerned, the spike-train of neuron $j$ can be expressed as
+process is modeled with a certain time course denoted by $\eta(t-t_{j}^{(f)})$, where $t_{j}^{(f)}$ referres the firing time defined by the moment of threshold $\vartheta$ crossing.
+Consequently, as far as the membrane potential is concerned, the spike-train of neuron $j$ can be expressed as
 \begin{equation}
 u_{j}(t)=\sum_{f\in \mathcal{F}_{j}}\eta(t-t_{j}^{(f)})
 \label{eq:refractoriness}
 \end{equation}
 
 Therefore, $\eta$ must model the positive pulse and the negative overshoot of the action potential. Since the spikes are characterised by their firing times, the positive pulse has no real significance. In contrast, the negative part has an important application: it comprises the ``reset'' of the membrane potential. Moreover, if the negative overshoot makes the membrane potential fall far below the threshold $\vartheta$, the emission of another pulse immediately after one is then more difficult (many PSPs are needed to reach again the threshold). This way, the negative overshoot of $\eta$ models not only the ``reset'', but also the refractory period or refractoriness of the neuron.
+
+As occurs with the spike response function $\varepsilon$, the refractoriness function $\eta$ allows different implementations with the only requirement of $\eta(t)=0~\text{for}~t\leq 0$.
 }
 
 \end{description}
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=0.8\textwidth]{images/srm_dynamics_png.png}
+\includegraphics[width=0.7\textwidth]{images/srm_dynamics_png.png}
 \caption{Postsynaptic neuron $j$ receives input from two presynaptic neurons $j=1,2$.}
 \label{fig:srmdynamic}
 \end{figure} 

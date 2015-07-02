@@ -13,7 +13,9 @@ consisting of $Q$ ordered pairs of input $\mathbf{p}$ and target output $\mathbf
 At the beginning, 
 when the input pattern $\mathbf{p}_{q}$ from the training set is presented to the neural network,
 it produces an output vector $\mathbf{o}_{q}$ different in general from the target $\mathbf{t}_{q}$.
-Hence, the final objective is to make $\mathbf{o}_{q}$ as equal as possible to $\mathbf{t}_{q}$ for $1 \leq q \leq Q$, which is possible by minimizing the error function of the network defined as
+Hence, the final objective is to make $\mathbf{o}_{q}$ as equal as possible to $\mathbf{t}_{q}$ for $1 \leq q \leq Q$, which is possible by minimizing the error function of the network. 
+The most common one chosen for backpropagation algorithms is the least mean squares
+error-function defined as
 \begin{equation}
 E=\frac{1}{2}\sum_{q=1}^{Q}
 \parallel \mathbf{t}_{q}-\mathbf{o}_{q} \parallel^2
@@ -75,15 +77,17 @@ where $\delta_{qj}$ is a variable introduced just for a matter of notation.
 Analising the sign of the above equation, two cases can be distinguished:
 \begin{itemize}
 
-\item If $\delta_{qj}a_{qj}<0$, the gradient of the error function is positive, which means that $E_{q}$ increases (decreases) when $w_{ji}$ rises (falls). In view of this, for getting a lower value of $E_{q}$ we only have to reduce the value of $w_{ji}$ in a controled way. The manner in which backpropagation update the weight value is by adding it the negative amount of $\delta_{qj}a_{qj}$ (remember that $\delta_{qj}a_{qj}<0$ in this case) multiplied by the constant $\eta$. This latter parameter is known as the \emph{learning rate of the algorithm} and it controls how big/small is the amount added to $w_{ji}$. 
+\item If $\delta_{qj}a_{qj}<0$, the gradient of the error function is positive, which means that $E_{q}$ increases (decreases) when $w_{ji}$ rises (falls). In view of this, for getting a lower value of $E_{q}$ we only have to reduce the value of $w_{ji}$ in a controled way. The manner in which backpropagation update the weight value is by adding it the negative amount of $\delta_{qj}a_{qj}$ (remember that $\delta_{qj}a_{qj}<0$ in this case) multiplied by the constant $\mu$. This latter parameter is known as the \emph{learning rate of the algorithm} and it controls how big/small is the amount added to $w_{ji}$. 
 
-\item The same reasoning is applied whether $\delta_{qj}a_{qj}>0$. In this case, $E_{q}$ decreases when $w_{ji}$ rises. The updated value of $w_{ji}$ can be therefore obtained by adding it the positive amount of $\delta_{qj}a_{qj}$ multiplied again by $\eta$.
+\item The same reasoning is applied whether $\delta_{qj}a_{qj}>0$. In this case, $E_{q}$ decreases when $w_{ji}$ rises. The updated value of $w_{ji}$ can be therefore obtained by adding it the positive amount of $\delta_{qj}a_{qj}$ multiplied again by $\mu$.
 
 \end{itemize}
 
-Thus, the updating process of each weight $w_{ji}$ can be expressed mathematically as
+Thus, the updating condition of each weight $w_{ji}$ can be expressed mathematically as
 \begin{equation}
-w_{ji}\leftarrow w_{ji}+ \eta\delta_{qj}a_{qj}
+w_{ji}\leftarrow w_{ji}+ \mu\delta_{qj}a_{qj}
+\Leftrightarrow 
+\Delta w_{ji}= -\mu\delta_{qj}a_{qj}
 \label{eq:updatingrule}
 \end{equation}
 
@@ -167,7 +171,28 @@ Therefore, the steps to follow and repeat until the error function reaches a min
 
 \subsection{Backpropagation through time}
 \label{subsec:bptt}
-Backpropagation through time (BPTT) is a variant of the above backpropagation algorithm. While the latter is used to train static feedforward networks, the BPTT is suitable for dynamic neural networks.
+Backpropagation through time (BPTT) is a variant of the above backpropagation algorithm. While the latter is used to train static feedforward networks, the BPTT is suitable for recurrent neural networks.
+
+BPTT algorithm begins by unfolding the dynamic network into a multilayer feedforward one. The new topology has a layer for each time step in the sequence, as if the time step is the index of the layer. During this process, the connections between layers mus be redirected too. Then, the static backpropagation algorithm can be used for training the feedforward network obtained. 
+\figref{bpttunfolding} shows how the unfolding process of depth $3$ (three time steps) is carried out.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\textwidth]{images/unfoldOverTime.png}
+\caption{A recurrent network unfolding process}
+\label{fig:bpttunfolding}
+\end{figure}
+
+Notice that, since layers have been obtained by replicating the recurrent network over and over,
+ weights in all layers should be the same.
+Thus, BPTT updates all equivalent weights using the sum of the gradients obtained for weights in all layers.
+
+In practice, this alogithm has an important drawback: 
+the entire time series must be used, 
+so its application becomes hard if online adaptation is required. 
+In order to avoid this situation, 
+a possibility is to truncate the time series. However, the memory beyond truncated time 
+cannot be captured by the model.
 
 \subsection{Backpropagation for spiking neural networks}
-\label{subsec:snnbackprop}
+\input{neuralnetworks/artificial/backpropsnn}
