@@ -25,6 +25,7 @@ The defining general equation of an one-step-ahead ARX model is
 % \end{equation}
 \begin{equation}
 \hat{y}(t) =f(\hat{y}(t-1),\hat{y}(t-2),...,\hat{y}(t-d_{y}), u(t-1),u(t-2),...,u(t-d_{u}))
+\label{eq:narxequation}
 \end{equation}
 where the value of the dependent output signal $\hat{y}(t)$ is 
 regressed on the $d_{y}\geq1$ previous values of the same output signal 
@@ -39,10 +40,12 @@ $f$ is a combination of the non-linear activation functions $\mathbf{f}^1$ and $
 In what concern training a NARX network the named \emph{Backpropagation Through Time} version of the backpropagation algorithm can be used (read \subsecref{bptt}). The process can be carried out in one out of the two modes shown in \figref{narxtrainingarch} \cite{menezes2008long}: 
 \begin{itemize}
 	\item Parallel architecture, 
-	where the output $\hat{y}(t)$ is fed back to the input of the feedforward neural network as part of the standard NARX architecture.
-	\item Series-parallel architecture, 
-	in which the true output $y(t)$ -well-known target output- is used instead of feeding back the estimated output $\hat{y}(t)$.
+	where the output $\hat{y}(t)$ is fed back to the input of the feedforward neural network as part of the standard NARX architecture. This architecture is more realistic, since it can be used without knowing a priori all the entire course time of $y(t)$. 
+	\item Series-parallel architecture,  
+	in which the true output $y(t)$ -well-known target output- is used instead of feeding back the estimated output $\hat{y}(t)$. This architecture is faster and more accurate, since it avoids the propagation of the output estimation.
 \end{itemize}
+
+Idially, NARX networks are trained with the series-parallel architecture and tested with the only parallel one.
 
 \begin{figure}[!ht]
 \centering

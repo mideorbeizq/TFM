@@ -25,5 +25,7 @@ the prediction horizon
 and even the way in which the target curve is detected.
 In a first instance, the greatest set of physiological variables used to predict the migraine target curve includes heart rate (HR), electrodermal activity (EDA), skin temperature (TEMP) and oxigen saturation (SpO2).
 
-Finally, since all networks weights are randomly initialised, 
-in order to achive better networks performance, each ANN is initialised and evaluated several times. The best trained ANN will be chosen later based on the test results and not on the training results for avoiding any overfitting.
+Finally, since the connection weights between neurons are randomly initialized,
+we create several nets with the same ANN configuration and initialized
+and trained each one independently. 
+Then, we compared their performance and stored the best one.

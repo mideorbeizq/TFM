@@ -21,7 +21,7 @@ and $\text{bias}=0$. The training algorithm is, of course, the backpropagation.
 As Perceptrons are static (\ie, without memory), each time series is truncated in every step with a window length of 15 samples. 
 With the set of samples formed by the all the signals (a total of $4*15=60$ input samples), an unique output sample is computed. Notice that all the samples of the entire time-window is introduce at once, losing the temporal characteristic of the time series. During the implementation process, we set the length of the window to the range $\in [10,50]$. The larger the window is, more computation capacities are needed.
 
-The configuration term that last is the forecasting horizon wich we denote as $n_{k}$ and it expressed the number of future time steps the algorithm is able to anticipate.
+The configuration term that lasts is the forecasting horizon. We denote it as $n_{k}$ and it expresses the number of future time steps the algorithm is able to anticipate.
 In the feedforward networks implemented, the prediction horizon is set by advancing in time the output. 
 Hence, with $n_{k}=3$ for example, the samples of the windowed signals aligned in $t=t_{0}$ are forced to produce the output sample of $t=t_{3}$.
 During our experiment, we set $n_{k}\in [10,50]$. 
