@@ -9,6 +9,7 @@ As far as the signals are concerned, we highlight the fact that only 4 migraine 
 The reason of this lies on the conclusion arrived in a previous work \cite{Irene:PFC:2014}: 
 the prediction goal seems to be achieve only with a per-patient model. 
 Then, as the monitoring period is short, few migraines are registered from each patient.
+Therefore, for the training set we used truncate version of a maximum of two migraines. Then, the test phase is carried out with the entire four migraine episodes.
 
 
 It is important to emphasize that,
@@ -19,6 +20,10 @@ The set of the adjustable params includes:
 the set of signals used as network inputs,
 the windowing or truncation of the time series,
 the amount of neurons in the network layers, 
-the number of time steps of the TDLs if they exist, 
+the number of time steps of the TDLs if they exist,
+the prediction horizon  
 and even the way in which the target curve is detected.
 In a first instance, the greatest set of physiological variables used to predict the migraine target curve includes heart rate (HR), electrodermal activity (EDA), skin temperature (TEMP) and oxigen saturation (SpO2).
+
+Finally, since all networks weights are randomly initialised, 
+in order to achive better networks performance, each ANN is initialised and evaluated several times. The best trained ANN will be chosen later based on the test results and not on the training results for avoiding any overfitting.
