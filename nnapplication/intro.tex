@@ -1,2 +1,24 @@
 %\chapter{Application of Artificial Neural Networks}
 \label{chapter:application}
+
+After describing the biological and mathematical background of the artificial neural networks (\charef{nn}) and the adquisition process of the physiological signals we are intended to use to predict migraine (\charef{setup}), this chapter exposes the work carried out during this project.
+
+
+It comprises the adaptation process of the monitored signals in order to make them suitable for being the inputs of each type of neural network. 
+As far as the signals are concerned, we highlight the fact that only 4 migraine episodes of the same patient were taken into account. 
+The reason of this lies on the conclusion arrived in a previous work \cite{Irene:PFC:2014}: 
+the prediction goal seems to be achieve only with a per-patient model. 
+Then, as the monitoring period is short, few migraines are registered from each patient.
+
+
+It is important to emphasize that,
+in order to compare and get better results,
+after build and evaluate each ANN topology,
+its parameters are modified and the ANN perform is reanalysed. 
+The set of the adjustable params includes:
+the set of signals used as network inputs,
+the windowing or truncation of the time series,
+the amount of neurons in the network layers, 
+the number of time steps of the TDLs if they exist, 
+and even the way in which the target curve is detected.
+In a first instance, the greatest set of physiological variables used to predict the migraine target curve includes heart rate (HR), electrodermal activity (EDA), skin temperature (TEMP) and oxigen saturation (SpO2).

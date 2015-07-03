@@ -45,5 +45,8 @@ Also the amplitude of the final curve is normalised in order to homogenise the e
 \label{fig:paincurve}
 \end{figure}
 
-Nevertheless, the target signal we used in our algorithms differs slightly of the curve described: we set the timestamp of the beginning of the aura phase as the first referent point instead of taking the beginning of pain for it. Doing this, we model other specific symptoms of the migraine disease and allow the algorithms to predict earlier the pain.
+Nevertheless, the target signal we used in our algorithms differs slightly of the curve described.
+We set the timestamp of the beginning of the aura phase as the first referent point instead of taking the beginning of pain for it. Doing this, we model other specific symptoms of the migraine disease and allow the algorithms to predict earlier the pain.
+
+Moreover, our intention is not the modeling of the pain curve of a migraine, but only predict the its beginning. Therefore, we build a new gaussian curve setting its maximum value when the pain starts (probability of headache of 100\%). Then, the decay of the second semi-bell is determined by a sigma value of $30$ minutes. This way, we allows a fast reset of the algorithm after predicting a migraine.
 
