@@ -7,12 +7,6 @@ described,
 \ie, the TDNN (\subsecref{ANN:TDNN}) and the NARX models (\subsecref{ANN:NARX}), 
 we also made used of the MatLab Toolbox for neural networks. 
 
-<<<<<<< HEAD
-Since we can considered a TDNN as a NARX model with the same input TDL 
-and a null delayed connection from the output to the input layer, 
-the bulding process of both ANNs is practically equal. Hence, if the the previous values of the independent exogenous input signal $u(t)$ in the NARX model was denoted as $d_{u}$ (\eref{narxequation}), we can expressed the same way the TDL time steps of the TDNN. For simplicity during the ANNs implementation, we denote this parameter as $n_{b}$. The delayed connection from the output to the input layer ($d_{y}$ in the NARX model), if exists, is from now expressed as $n_{a}$. 
-Finally, the prediction horizon is denoted as $n_{k}$ as it happens with the feedforward networks (\subsecref{perceptronapplication}).
-=======
 Since we can consider a TDNN as a NARX model with the same input TDL
 and a null delayed connection from the output to the input layer, the
 bulding process of both ANNs is practically equal. Hence, if the
@@ -24,7 +18,6 @@ connection from the output to the input layer ($d_{y}$ in the NARX
 model), if exists, is from now expressed as $n_{a}$.  Finally, the
 prediction horizon is denoted as $n_{k}$ as it happens with the
 feedforward networks (\subsecref{perceptronapplication}).
->>>>>>> 59506aa71c1a41badbcbed520715d0002d5ebf89
 
 The most paramount aspect we must take into account is that samples
 cannot be introduced in the dynamic network the same way as with a
@@ -130,7 +123,7 @@ It is exactly this latter topology the one with the best results of prediction w
 \caption{NARX model test for the four migraines considered}
 \label{fig:narxTest}
 \end{figure}
-<<<<<<< HEAD
+
 
 We can observe that the output curve (red/black) does not adjust to the target one (blue) -the performance metric (MSE) results written in the title of each graphic can corroborate this lack of fitting. However, the four migraines can be detected by thresholding the output. The clue is that the output curve must reach the threshold value before (or at the same time in the worst case) as the real migraine -target- does. If the contrary occurs, then the algorithm will fail and  the pain will begin before the system can notify the patient that a headache is arriving.
 
@@ -225,10 +218,3 @@ Hidden to output weights:
 
 \end{description}
 
-
-
-
-
-
-=======
->>>>>>> 59506aa71c1a41badbcbed520715d0002d5ebf89

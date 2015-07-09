@@ -1,9 +1,34 @@
 %\chapter{Conclusions and future work}
 \label{chapter:conclusionsandfuturework}
 
+This chapter tries to outline the main conclusions arrived during this project and some work lines for the future that can improve the results obtained.
+
 \section{Conclusions}
 \label{sec:conclusions}
+The aim of this work was to develop an algorithm that can predict  migraine episodes. 
+More precisely, we intented to build an Artificial Neural Network whose output determines the time when a headache is detected to arrive in the near future. The target signal was modeled as a gaussian curve: the left semi-bell is built from the beginning of the aura phase to the starting of the pain (peak of the gaussian), whereas the sigma of the right semi-bell corresponds to 30 minutes of time.
+The inputs of the ANN are physiological signals that we monitored from real patients in a previous work. 
+These biometric variables are heart rate, electrodermal activity, oxigen saturation and skin temperature and they were chosen from the set of variables that the actual literature associate with migraine.
 
+We designed, built and evaluated different topologies of ANNs: the Perceptron, the Time Delay Neural Network, the NARX model with the aid of the Neural Network Tookbox of MatLab, and the Spiking Neural Network implemting us the entire code. The next lines summerise the results and the conclusions we can postulate in the light of them.
+\begin{itemize}
+\item The output of the static neural network implemented does not ``follow'' the target signal. The reason is that this kind of networks are not suitable for temporal signal processing because of its lack of memory. 
+\item The behaviour of the Time Delay net was better than the one of the static networks. However, an almost chaotic output was obtained. Carrying out a moving average process, the performance seems to improve. Although we obtained acceptable results in the training phase, the test one concludes that the TDNNs implemented are not suitable for our purpose.
+\item With the NARX model we obtained our best results, since in the test phase we were able to produce prediction horizons with a margin of hundreds of minutes.
+\item The Spiking Neural Networks are suposed to be our best choice of ANNs. Nevertheless, we were not capable of implement a spike net that can suit our scenario.
+\end{itemize}
+
+Although ideally the forecasting margin must be a constant, in view of the aforesaid results, we can affirm that our aim was achieved making use of the NARX model. Then, among the next steps to carry out, we must fix the threshold of detection and reset that suits better for a greater amount of migraine episodes.
 
 \section{Future work}
 \label{sec:futurework}
+
+Many are the work lines open with ANNs for our purpose. 
+First of all, more experiments can be carry out with the net configurations presented in this work. 
+Especially with SNNs, which were not enough exploted and maybe other types of codification process can result in a better global performance. 
+
+Apart from the chosen topologies, there are other kinds of ANNs that might be worth considering: Radial Basis Function (RBF) networks, Fully Recurrent networks, Stochastic neural networks, Instantaneously trained networks, Cascading neural networks, Neuro-fuzzy networks, and many others.
+
+Also the learning algorithm might be worth changing. Among the supervised training algorithms, we only have experiment with the backpropagation learning rules. However, other possibilities can be considered, even unsupervised methods, which can classify the sain and the headache states in a different way we have been traying to do.
+
+
