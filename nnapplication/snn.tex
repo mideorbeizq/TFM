@@ -91,7 +91,7 @@ where $\vartheta$ is the threshold of the neuron, $\tau_{r}$ is a another time c
 
 \subsection{Implementation of the Spiking Neural Network}
 \label{subsec:snnimplementation}
-The SNN we have implemented tries to solve the same scenario as the other ANNs analysed; \ie, its parameters are set in that way the resultant SNN can be compared with the other models in terms of prediction horizon (30 minutes) and number of neurons in the net (the minimum possible). Other parameters related to the topology are not comparable because of the differences in the type of ANNs.
+The SNN we have implemented tries to solve the same scenario as the other ANNs analysed; \ie, its parameters are set in in a manner that the resultant SNN can be compared with the other models in terms of prediction horizon (30 minutes). Other parameters related to the topology are not comparable because of the differences in the type of ANNs.
 
 Hence, our SNN has, for each physiological signal, a number of input neurons equal to the amount of GRFs used for encoding the analog values. Therefore, in our net there are 3 neurons for each signal source, which means a total of 12 neurons in the input layer. All these neurons are connected to the output layer, which has a unique neuron.
 
@@ -100,7 +100,6 @@ We configured the network in order to have $m=2$ synapses in each connection bet
 For dealing with the maximum delay encoded with the GRFs (see \subsecref{codification}) we windowed all signals. We set the window length equal to this maximum delay (20 units of time) and combined the spikes that fired within the window removing the repeated delays. This way, if an analog value was encoded with delays $d_{GRF_{1}}=8$ and $d_{GRF_{2}}=2$ and, within the same window, another analog value was encoded with $d_{GRF_{1}}=8,d_{GRF_{2}}=5$ and $d_{GRF_{3}}=16$, then, the final spike train that encodes the entire window is $d_{GRF_{1}}=8, d_{GRF_{2}}=[2,5]$ and $d_{GRF_{1}}=16$. 
 
 We implemented every equation of the spike backpropagation algorithm in MatLab. Every step, the signal window is shifted without overlapping, \ie, it is shifted a number of units of time equals to the window length. 
-
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.85\columnwidth]{images/results/snn1.png}
@@ -108,7 +107,13 @@ We implemented every equation of the spike backpropagation algorithm in MatLab. 
 \label{fig:snnResults}
 \end{figure}
 
-\figref{snnResults} shows a grahical example we obtained. In the plot, the y-axis and x-axis represent each neuron and the time respectively. Thus, a point in $x=57, y=4$ depicts a spike in $t=57$ of the $4^{\text{th}}$ neuron. The red points correspond to the original output spikes; the green ones, to the encoded target signal and black ones to the output spikes after training the network. The blue points are the spikes of the input neurons, so that neurons 1-3 fire because of the HR signal, 4-6 because of the EDA variable, 7-9 corresponds to TEMP signal and the Sp02 is encoded in neurons 10-12. The pink curve represents the analog target signal just for a better visualization of the important timestamps.
+\figref{snnResults} shows a grahical example we obtained. In the plot, the y-axis and x-axis represent each neuron and the time respectively. Thus, a point in $x=57, y=4$ depicts a spike in $t=57$ of the $4^{\text{th}}$ neuron. The red points correspond to the original output spikes; the green ones, to the encoded target signal and black ones to the output spikes after training the network. The blue points are the spikes of the input neurons, so that neurons 1-3 fire because of the HR signal, 4-6 because of the EDA variable, 7-9 corresponds to TEMP signal and the Sp02 is encoded in neurons 10-12. The pink curve represents the analog target signal just for a better visualization of the important timestamps. A zoomed plot can be observed in \figref{snnResultsZoom} in order to indicate that spikes are not as periodically as they seem.
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.85\columnwidth]{images/results/snn1zoomed.png}
+\caption{Zoomed plot of spikes distribution}
+\label{fig:snnResultsZoom}
+\end{figure}
 
 Notice that physiological signals were encoded into three spikes-train, one for each GRF used. However, we have a single output neuron and therefore we must encode the target signal into a unique sequence of spikes. We carried out this process by applying a little SNN: 
 \begin{enumerate}
@@ -117,6 +122,11 @@ Notice that physiological signals were encoded into three spikes-train, one for 
 \item The encoded analog target signal is presented to the just build SNN, so that the output of the net comprises the codification of the target signal for the principal SNN.
 \end{enumerate}
 
-Following this process, we can observe how the output neuron begins to fire (green points in \figref{snnResults}) when the analog target signal arrives to the pain gaussian (pink curve in \figref{snnResults}).
+Following this process, we can observe how the output neuron begins to fire (green points in \figref{snnResults}) before the analog target signal arrives to the pain gaussian (pink curve in \figref{snnResults}). 
+The first firing time of this spike traine fixes our prediction horizon. 
+Also the output neuron stops firing after the target signal decrease its value, which indicate that the reset process can be carried out successfully.
 
-Unfortunately, our implementation of the backpropagation algorithm does not make the SNN learn correctly: the output neuron spikes too many times. Consequently, the SNN developed cannot be used as predictor because of the multiple false positives it would produce.
+Unfortunately, our implementation of the backpropagation algorithm does not make the SNN learn correctly: 
+the output neuron spikes too many times. 
+Consequently, the SNN developed cannot be used as predictor because of the multiple false positives it would produce. 
+Besides, the NARX model generates a greater forecasting horizon, concluding that one can perform better predictions.
