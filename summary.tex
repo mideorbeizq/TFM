@@ -1,20 +1,30 @@
 %\chapter*{} 
 %\subsection*{Summary}
 
-\thispagestyle{empty} 
+%\thispagestyle{empty} 
  
+Migraine is a very common disease characterized by recurrent headache attacks. It is a crippling pathology that disturbs the personal, family, labor, and social lives of the people who suffer it. Besides, its medical treatment supposes a great percentage of the costs of health systems.
 
+Although some characteristic symptoms typically precede the headache, they usually do not appear with the anticipation that would be necessary for medi\-cines to become effective and neutralize the pain. However, as patients are able to feel and recognize the symptoms, we believe there must be an organic, physiological (and measurable) base that could be detected with enough advance to solve this problem.
 
+With the aim of detecting these underlying conditions and being able to predict the headache, in this project we propose, design and evaluate some data mining approaches based on Artificial Neural Networks (ANNs). 
 
+The inputs signals of all the analysed ANNs are physiological variables monitored previously from real migraineurs. 
+The target output signal for each migraine episode was built from the symptoms and pain evolution curve registered manually by each patient.
+Therefore, the work carried out also comprises the adaptation process of the monitored signals in order to make them suitable for the ANNs developed.
 
+Among the different topologies studied, we began implementing the most simple Perceptron and ended analysing the performance of the novel Spiking Neural Networks. In between, we evaluated two types of dynamic nets: the Time Delay networks and the Recurrent ones that implement the NARX model. We also studied how different values of the parameters that define each topology affect the output of the network and therefore the prediction.
 
+While the Perceptron seems not to suit our purpose because its lack of memory, the dynamic networks provide better results. More precisely, with the NARX model we achieved predicting migraines with forecasting horizons of about a hundred of minutes. 
+The results we obtained with the Spiking Neural Networks, which specifically incorporate spatial-temporal information, were not as positive as expected. However, they give the impression of having a huge potential in our scenario, so some more experiments must be made in the future with this type of ANNs.
 
+In the view of the aforesaid about the NARX model, the migraine prediction from its symptoms can be already a reality. This means that the 6\% and 8\% of world women and men will take their medicines enough in advanced that allows the complete actuation of the treatment, with the consequent increase of satisfaction of the patient and the reduction of the sanitary costs.
 
 
 \vspace*{0.5cm} 
 
 
-\subsubsection*{Key  words:} real biometric  signals, algorithms, artificial neural networks, migraine, prediction 
+\subsubsection*{Key  words:} real biometric signals, algorithms, artificial neural networks, migraine, prediction 
  
 \clearpage 
 \thispagestyle{empty}

@@ -2,15 +2,25 @@
 %\subsection*{Resumen}
 \thispagestyle{empty}  
 
+La migraña es una enfermedad frecuente que se caracteriza por recurrentes dolores de cabeza. Se trata de una patología paralizante en cuanto a que afecta a la vida personal, familiar, laboral y social de la persona que la sufre. Además, su tratamiento médico supone un alto porcentaje en los costes totales de los sistemas sanitarios.
 
+Aunque existen síntomas característicos que preceden a la migraña, éstos no suelen manifestarse con suficiente anticipación como para que las medicinas sean efectivas y neutralicen el dolor. No obstante, dado que los pacientes son capaces de reconocer dichos síntomas, creemos que debe existir una base intrínseca, fisiológica y medible que pueda ser detectada con suficiente antelación para resolver el problema de los medicamentos.
 
+Con el objetivo de medir estas condiciones subyacentes y ser capaces de predecir el dolor de cabeza, en este proyecto proponemos, diseñamos y evaluamos algunos métodos de \emph{data mining} basados en Redes Neuronales Artificiales.
 
+Las señales de entras de las redes analizadas son variabels fisiológicas que fueron monitorizadas previamente de pacientes reales. La señal objetivo de cada episodio migrañoso fue construida a partir de la curva de evolución de los síntomas y el dolor registrada manualmente por el paciente. Por lo tanto, el trabajo llevado a cabo comprende también el proceso de adaptación de las señales monitorizadas para que puedas ser utilizadas con las redes neuronales desarrolladas.
 
+Entre las diferentes topologías estudiadas, empezamos implementando el más simple perceptrón y acabamos analizando las novedosas redes neuronales pulsantes. Entremedias, evaluamos dos tipos de redes dinámicas: las \emph{Time Delay} y, entre las recurrentes, las que implementan el modelo NARX. Estudiamos también cómo los diferentes valores de los parámetros que define cada topología afecta a la salida de la red y, por consiguiente, a la predicción.
+
+Mientras que el Perceptrón parece no adaptarse a nuestro objetivo por su falta de memoria, las redes dinámicas arrojaron mejores resultados. Más concretamente, con el modelo NARX conseguimos predecir migrañas con horizontes de predicción entorno al centenar de minutos.
+Los resultados obtenidos con las redes pulsantes, las cuales incorporan específicamente información espacio-temporal, no fueron tan positivos como se esperaban. No obstante, han dado la impresión de tener un enorme potencial en nuestro escenario, por lo que más experimentos deberían hacerse en un futuro con este tipo de redes neuronales artificales.
+
+A la vista de lo dicho anteriormente sobre el modelo NARX, la predicción de migraña a partir de sus síntomas puede ser ya una realidad. Esto significa que el 6\% de las mujeres y el 8\% de los hombres del mundo que la sufren podrán tomarse sus medicinas con suficiente tiempo de antelación como para que la actuación del tratamiento sea completa y eficaz, con el consecuente incremento de la satisfacción del paciente y la reducción de los costes sanitarios.
 
 
 
 
 \vspace*{0.5cm} 
  
-\subsubsection*{Palabras  clave:}  señales  biométricas reales, algoritmos, redes neuronales artificiales, migraña, predicción
+\subsubsection*{Palabras  clave:}  señales biométricas reales, algoritmos, redes neuronales artificiales, migraña, predicción
 
